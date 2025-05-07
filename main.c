@@ -2,9 +2,7 @@
 // Fungsi untuk membersihkan layar konsol
 void clearScreen() {
     #ifdef _WIN32
-        system("cls");  // Untuk Windows
-    #else
-        system("clear"); // Untuk Linux/Unix/macOS
+        system("cls");  
     #endif
 }
 
