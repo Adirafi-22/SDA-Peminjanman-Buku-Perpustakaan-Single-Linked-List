@@ -195,62 +195,6 @@ void batalkanAktivitas(List *L, Stack *S) {
     }
 }
 
-void simulasiSkenario() {
-    List daftarBuku;
-    Stack historyAktivitas;
-    
-    createEmpty(&daftarBuku);
-    createEmptyStack(&historyAktivitas);
-    
-    printf("\n=== SIMULASI SKENARIO STUDI KASUS ===\n");
-    
-    // a) 2 X insert elemen "Buku1" dan "Buku2" di list Buku dimana stok buku masing masing 1
-    printf("\nLangkah a) Insert Buku1 dan Buku2 dengan stok masing-masing 1\n");
-    tambahBuku(&daftarBuku, "Buku1", 1);
-    tambahBuku(&daftarBuku, "Buku2", 1);
-    printInfo(daftarBuku);
-    
-    // b) 1 X insert elemen "Anggota1" sebagai mahasiswa di list peminjaman "Buku1"
-    printf("\nLangkah b) Insert Anggota1 sebagai mahasiswa di list peminjaman Buku1\n");
-    pinjamBuku(&daftarBuku, &historyAktivitas, "Buku1", "Anggota1", MAHASISWA);
-    
-    // c) 1 X insert elemen "Dosen1" sebagai dosen di list peminjaman "Buku1"
-    printf("\nLangkah c) Insert Dosen1 sebagai dosen di list peminjaman Buku1\n");
-    pinjamBuku(&daftarBuku, &historyAktivitas, "Buku1", "Dosen1", DOSEN);
-    
-    // d) 1 X insert elemen "Umum1" sebagai masyarakat umum di list peminjaman "Buku1"
-    printf("\nLangkah d) Insert Umum1 sebagai masyarakat umum di list peminjaman Buku1\n");
-    pinjamBuku(&daftarBuku, &historyAktivitas, "Buku1", "Umum1", MASYARAKAT_UMUM);
-    
-    // e) 1 X insert elemen "Umum1" sebagai masyarakat umum di list peminjaman "Buku2"
-    printf("\nLangkah e) Insert Umum1 sebagai masyarakat umum di list peminjaman Buku2\n");
-    pinjamBuku(&daftarBuku, &historyAktivitas, "Buku2", "Umum1", MASYARAKAT_UMUM);
-    
-    // f) Proses peminjaman "Buku1". Pastikan "Dosen1" yang mendapatkan proses peminjaman.
-    printf("\nLangkah f) Proses peminjaman Buku1\n");
-    addressList P = findElm(daftarBuku, "Buku1");
-    printf("Antrian peminjam Buku1 sebelum peminjaman:\n");
-    printInfoQueue(P->antrianPeminjam);
-    prosesPeminjaman(&daftarBuku, &historyAktivitas, "Buku1");
-    printf("Antrian peminjam Buku1 setelah peminjaman:\n");
-    printInfoQueue(P->antrianPeminjam);
-    printInfo(daftarBuku);
-    
-    // g) Proses pengembalian "Buku1" oleh "Dosen1". Pastikan potensi selanjutnya yang akan mendapatkan fasilitas peminjaman adalah "Anggota1" di list peminjaman "Buku1".
-    printf("\nLangkah g) Proses pengembalian Buku1 oleh Dosen1\n");
-    kembalikanBuku(&daftarBuku, &historyAktivitas, "Buku1", "Dosen1");
-    printInfo(daftarBuku);
-    
-    // h) Elemen "Umum1" melakukan pembatalan aktivitas peminjaman buku (berdasarkan aktivitas terakhir, pembatalan terjadi untuk list peminjaman "Buku2").
-    printf("\nLangkah h) Pembatalan aktivitas peminjaman Buku2 oleh Umum1\n");
-    printInfoStack(historyAktivitas);
-    batalkanAktivitas(&daftarBuku, &historyAktivitas);
-    
-    printf("\nStatus akhir setelah semua skenario dijalankan:\n");
-    printInfo(daftarBuku);
-    printInfoStack(historyAktivitas);
-}
-
 int main() {
     List daftarBuku;
     Stack historyAktivitas;
@@ -272,7 +216,6 @@ int main() {
         printf("6. Batalkan Aktivitas Terakhir\n");
         printf("7. Lihat Data Buku\n");
         printf("8. Lihat History Aktivitas\n");
-        printf("9. Jalankan Simulasi Skenario\n");
         printf("0. Keluar\n");
         printf("Pilihan Anda: ");
         scanf("%d", &pilihan);
@@ -280,7 +223,7 @@ int main() {
         
         switch (pilihan) {
             case 1:
-            	clearScreen();
+                clearScreen();
                 printf("\n--- TAMBAH BUKU ---\n");
                 printf("Judul buku: ");
                 fgets(judul, 50, stdin);
@@ -294,7 +237,7 @@ int main() {
                 break;
                 
             case 2:
-            	clearScreen();
+                clearScreen();
                 printf("\n--- TAMBAH STOK ---\n");
                 printf("Judul buku: ");
                 fgets(judul, 50, stdin);
@@ -308,7 +251,7 @@ int main() {
                 break;
                 
             case 3:
-            	clearScreen();
+                clearScreen();
                 printf("\n--- PINJAM BUKU ---\n");
                 printf("Judul buku: ");
                 fgets(judul, 50, stdin);
@@ -326,7 +269,7 @@ int main() {
                 break;
                 
             case 4:
-            	clearScreen();
+                clearScreen();
                 printf("\n--- PROSES PEMINJAMAN ---\n");
                 printf("Judul buku yang akan diproses: ");
                 fgets(judul, 50, stdin);
@@ -336,7 +279,7 @@ int main() {
                 break;
                 
             case 5:
-            	clearScreen();
+                clearScreen();
                 printf("\n--- KEMBALIKAN BUKU ---\n");
                 printf("Judul buku: ");
                 fgets(judul, 50, stdin);
@@ -350,29 +293,23 @@ int main() {
                 break;
                 
             case 6:
-            	clearScreen();
+                clearScreen();
                 printf("\n--- BATALKAN AKTIVITAS TERAKHIR ---\n");
                 batalkanAktivitas(&daftarBuku, &historyAktivitas);
                 break;
                 
             case 7:
-            	clearScreen();
+                clearScreen();
                 printInfo(daftarBuku);
                 break;
                 
             case 8:
-            	clearScreen();
-            	clearScreen();
+                clearScreen();
                 printInfoStack(historyAktivitas);
                 break;
                 
-            case 9:
-            	clearScreen();
-                simulasiSkenario();
-                break;
-                
             case 0:
-            	clearScreen();
+                clearScreen();
                 printf("Terima kasih telah menggunakan program ini.\n");
                 break;
                 
