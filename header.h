@@ -11,8 +11,6 @@
 #define DOSEN 3
 void clearScreen();
 
-
-
 // Struktur data untuk aktivitas (digunakan di stack)
 typedef struct {
     char namaPeminjam[50];
